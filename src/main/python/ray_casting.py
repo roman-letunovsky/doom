@@ -2,7 +2,7 @@ import pygame
 from settings import *
 from map import world_map
 from pygame import Surface
-# from pygame import Rect
+from pygame import Rect
 
 
 def mapping(a, b):
@@ -47,16 +47,16 @@ def ray_casting(sc, player_pos, player_angle, texture: Surface):
 
         # projection
         depth, offset = (depth_v, yv) if depth_v < depth_h else (depth_h, xh)
-        # offset = int(offset) % TILE
+        offset = int(offset) % TILE
         depth *= math.cos(player_angle - cur_angle)
         depth = max(depth, 0.00001)
         proj_height = min(int(PROJ_COEFF / depth), 2 * HEIGHT)
-        c = 255 / (1 + depth * depth * 0.00002)
-        color = (c, c // 2, c // 3)
-        pygame.draw.rect(sc, color, (ray * SCALE, HALF_HEIGHT - proj_height // 2, SCALE, proj_height))
+        # c = 255 / (1 + depth * depth * 0.00002)
+        # color = (c, c // 2, c // 3)
+        # pygame.draw.rect(sc, color, (ray * SCALE, HALF_HEIGHT - proj_height // 2, SCALE, proj_height))
 
-        # wall_column = texture.subsurface(Rect(offset * TEXTURE_SCALE, 0, TEXTURE_SCALE, TEXTURE_HEIGHT))
-        # wall_column = pygame.transform.scale(wall_column, (SCALE, proj_height))
-        # sc.blit(wall_column, (ray * SCALE, HALF_HEIGHT * proj_height // 2))
+        wall_column = texture.subsurface(Rect(offset * TEXTURE_SCALE, 0, TEXTURE_SCALE, TEXTURE_HEIGHT))
+        wall_column = pygame.transform.scale(wall_column, (SCALE, proj_height))
+        sc.blit(wall_column, (ray * SCALE, HALF_HEIGHT - proj_height // 2))
 
         cur_angle += DELTA_ANGLE

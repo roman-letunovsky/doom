@@ -1,14 +1,14 @@
 from settings import *
 
 text_map = [
-    'WWWWWWWWWWWWWWWW',
-    'W......W...WWWWW',
-    'W...WW...WWW..WW',
-    'WWW.....WW.WWWWW',
-    'W..W....W..WWWWW',
-    'W..W...WWW.W...W',
-    'W....W.....W...W',
-    'WWWWWWWWWWWWWWWW'
+    'WWWWWWWWWWWWW',
+    'W......W...WW',
+    'W...WW...W..W',
+    'WWW.....WW..W',
+    'W..W....W...W',
+    'W..W...WWW.WW',
+    'W....W......W',
+    'WWWWWWWWWWWWW',
 ]
 
 world_map = set()

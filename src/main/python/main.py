@@ -2,7 +2,6 @@ import pygame
 from settings import *
 from player import Player
 from drawing import Drawing
-from map import world_map
 
 pygame.init()
 sc = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -23,7 +22,6 @@ while True:
     drawing.world(player.pos, player.angle)
     drawing.fps(clock)
     drawing.mini_map(player)
-
 
     pygame.display.flip()
     clock.tick()

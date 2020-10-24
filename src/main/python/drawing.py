@@ -2,21 +2,28 @@ import pygame
 from settings import *
 from ray_casting import ray_casting
 from map import mini_map
+from pygame import Surface
 
 
 class Drawing:
-    def __init__(self, sc, sc_map):
+    def __init__(self, sc: Surface, sc_map: Surface):
         self.sc = sc
         self.sc_map = sc_map
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.texture = pygame.image.load('v462-n-130-textureidea_1.jpg').convert()
+        self.textures = {'1': pygame.image.load('img/wall_brick.png').convert(),
+                         '2': pygame.image.load('img/wall_deco.jpg').convert(),
+                         'S': pygame.image.load('img/sky.png').convert()
+                         }
 
-    def background(self):
-        pygame.draw.rect(self.sc, SKYBLUE, (0, 0, WIDTH, HALF_HEIGHT))
+    def background(self, angle):
+        sky_offset = -4 * math.degrees(angle) % WIDTH
+        self.sc.blit(self.textures['S'], (sky_offset, 0))
+        self.sc.blit(self.textures['S'], (sky_offset - WIDTH, 0))
+        self.sc.blit(self.textures['S'], (sky_offset + WIDTH, 0))
         pygame.draw.rect(self.sc, DARKGRAY, (0, HALF_HEIGHT, WIDTH, HALF_HEIGHT))
 
     def world(self, p_player_pos, p_player_angle):
-        ray_casting(self.sc, p_player_pos, p_player_angle, self.texture)
+        ray_casting(self.sc, p_player_pos, p_player_angle, self.textures)
 
     def fps(self, clock):
         display_fps = str(int(clock.get_fps()))
@@ -30,5 +37,5 @@ class Drawing:
         pygame.draw.line(self.sc_map, YELLOW, (map_x, map_y), (map_x + WIDTH * math.cos(player.angle),
                                                                map_y + WIDTH * math.sin(player.angle)), 2)
         for x, y in mini_map:
-            pygame.draw.rect(self.sc_map, GREEN, (x, y, MAP_TILE, MAP_TILE))
+            pygame.draw.rect(self.sc_map, SANDY, (x, y, MAP_TILE, MAP_TILE))
         self.sc.blit(self.sc_map, MAP_POS)

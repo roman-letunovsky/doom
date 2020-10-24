@@ -4,7 +4,7 @@ import math
 
 
 class Player:
-    def __init__(self, p_player_pos, p_player_angle):
+    def __init__(self, p_player_pos: float, p_player_angle: float):
         self.x, self.y = p_player_pos
         self.angle = p_player_angle
 

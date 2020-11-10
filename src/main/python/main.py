@@ -15,15 +15,14 @@ player = Player(sprites)
 drawing = Drawing(sc, sc_map, player)
 
 while True:
+
     player.movement()
-
-
     drawing.background(player.angle)
-    walls = ray_casting_walls(player, drawing.textures)
+    walls, wall_shot = ray_casting_walls(player, drawing.textures)
     drawing.world(walls + [obj.object_locate(player) for obj in sprites.list_of_objects])
     drawing.fps(clock)
     drawing.mini_map(player)
-    drawing.player_weapon()
+    drawing.player_weapon((wall_shot, sprites.sprite_shot))
 
     pygame.display.flip()
     clock.tick(FPS)

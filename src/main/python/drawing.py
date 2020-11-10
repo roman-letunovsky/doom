@@ -14,7 +14,7 @@ class Drawing:
                          2: pygame.image.load('img/wall4.png').convert(),
                          3: pygame.image.load('img/wall1.png').convert(),
                          4: pygame.image.load('img/wall2.png').convert(),
-                         'S': pygame.image.load('img/sky.png').convert()
+                         'S': pygame.image.load('img/sky2.png').convert()
                          }
         self.weapon_base_sprite = pygame.image.load('sprites/weapons/shotgun/base/0.png').convert_alpha()
         self.weapon_shot_animation = deque([pygame.image.load(f'sprites/weapons/shotgun/shot/{i}.png').convert_alpha()
@@ -26,6 +26,9 @@ class Drawing:
         self.shot_animation_speed = 3
         self.shot_animation_count = 0
         self.shot_animation_trigger = True
+        self.sfx = deque([pygame.image.load(f'sprites/weapons/sfx/{i}.png').convert_alpha() for i in range(9)])
+        self.sfx_lenght_count = 0
+        self.sfx_lenght = len(self.sfx)
 
     def background(self, angle):
         sky_offset = -10 * math.degrees(angle) % WIDTH
@@ -55,8 +58,10 @@ class Drawing:
             pygame.draw.rect(self.sc_map, DARKBROWN, (x, y, MAP_TILE, MAP_TILE))
         self.sc.blit(self.sc_map, MAP_POS)
 
-    def player_weapon(self):
+    def player_weapon(self, shots):
         if self.player.shot:
+            self.shot_projection = min(shots)[1] // 2
+            self.bullet_sfx()
             shot_sprite = self.weapon_shot_animation[0]
             self.sc.blit(shot_sprite, self.weapon_pos)
             self.shot_animation_count += 1
@@ -68,6 +73,15 @@ class Drawing:
             if self.shot_length_count == self.shot_length:
                 self.player.shot = False
                 self.shot_length_count = 0
+                self.sfx_lenght_count = 0
                 self.shot_animation_trigger = True
         else:
             self.sc.blit(self.weapon_base_sprite, self.weapon_pos)
+
+    def bullet_sfx(self):
+        if self.shot_length_count < self.sfx_lenght:
+            sfx = pygame.transform.scale(self.sfx[0], (self.shot_projection, self.shot_projection))
+            sfx_rect = sfx.get_rect()
+            self.sc.blit(sfx, (HALF_WIDTH - sfx_rect.w // 2, HALF_HEIGHT - sfx_rect.h // 2))
+            self.sfx_lenght_count += 1
+            self.sfx.rotate(-1)

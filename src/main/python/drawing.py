@@ -6,6 +6,7 @@ from collections import deque
 from random import randrange
 import sys
 
+
 class Drawing:
     def __init__(self, sc, sc_map, player, clock):
         self.sc = sc
@@ -132,7 +133,7 @@ class Drawing:
             self.sc.blit(exit, (button_exit.centerx - 85, button_exit.centery - 70))
 
             color = randrange(40)
-            label = label_font.render('DOOM', 1, (color, color, color))
+            label = label_font.render('DOOMpy', 1, (color, color, color))
             self.sc.blit(label, (15, -30))
 
             mouse_pos = pygame.mouse.get_pos()

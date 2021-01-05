@@ -28,6 +28,7 @@ while True:
 
     interaction.interaction_objects()
     interaction.npc_action()
+    interaction.clear_world()
 
     pygame.display.flip()
     clock.tick(FPS)

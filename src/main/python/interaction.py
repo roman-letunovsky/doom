@@ -72,3 +72,7 @@ class Interaction:
             dy = obj.y - self.player.pos[1]
             obj.x = obj.x + 1 if dx < 0 else obj.x - 1
             obj.y = obj.y + 1 if dy < 0 else obj.y - 1
+
+    def clear_world(self):
+        deleted_objects = self.sprites.list_of_objects[:]
+        [self.sprites.list_of_objects.remove(obj) for obj in deleted_objects if obj.delete]

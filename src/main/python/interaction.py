@@ -44,6 +44,7 @@ class Interaction:
         self.player = player
         self.sprites = sprites
         self.drawing = drawing
+        self.pain_soud = pygame.mixer.Sound('sound/pain.wav')
 
     def interaction_objects(self):
         if self.player.shot and self.drawing.shot_animation_trigger:
@@ -51,6 +52,8 @@ class Interaction:
                 if obj.is_on_fire[1]:
                     if obj.is_dead != 'immortal' and not obj.is_dead:
                         if ray_casting_npc_player(obj.x, obj.y, world_map, self.player.pos):
+                            if obj.flag == 'npc':
+                                self.pain_soud.play()
                             obj.is_dead = True
                             obj.blocked = None
                             self.drawing.shot_animation_trigger = False
@@ -76,3 +79,21 @@ class Interaction:
     def clear_world(self):
         deleted_objects = self.sprites.list_of_objects[:]
         [self.sprites.list_of_objects.remove(obj) for obj in deleted_objects if obj.delete]
+
+    def play_music(self):
+        pygame.mixer.pre_init(44100, -16, 2, 2048)
+        pygame.mixer.init()
+        pygame.mixer.music.load('sound/theme.mp3')
+        pygame.mixer.music.play(10)
+
+    def check_win(self):
+        if not len([obj for obj in self.sprites.list_of_objects if obj.flag == 'npc' and not obj.is_dead]):
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load('sound/win.mp3')
+            pygame.mixer.music.play()
+            while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        exit()
+                self.drawing.win()
+

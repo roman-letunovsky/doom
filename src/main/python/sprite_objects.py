@@ -89,6 +89,7 @@ class Sprites:
     def sprite_shot(self):
         return min([obj.is_on_fire for obj in self.list_of_objects], default=(float('inf'), 0))
 
+
 class SpriteObject:
     def __init__(self, parameters, pos):
         self.object = parameters['sprite'].copy()
@@ -167,7 +168,7 @@ class SpriteObject:
                 sprite_object = self.sprite_animation()
 
 
-            # sprite scale and pos
+# sprite_scale_and_pos
             sprite_pos = (self.current_ray * SCALE - half_sprite_width, HALF_HEIGHT - half_sprite_height + shift)
             sprite = pygame.transform.scale(sprite_object, (sprite_width, sprite_height))
             return (self.distance_to_sprite, sprite, sprite_pos)
@@ -184,6 +185,7 @@ class SpriteObject:
                 self.animation_count = 0
             return sprite_object
         return self.object
+
     def visible_sprite(self):
         if self.viewing_angles:
             if self.theta < 0:

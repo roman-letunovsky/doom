@@ -12,6 +12,10 @@ class Player:
         self.side = 50
         self.rect = pygame.Rect(*player_pos, self.side, self.side)
         self.shot = False
+        self.hitbox = (self.x, self.y, 64, 64)
+        self.health = 30
+        self.lives = 1
+        self.alive = True
 
 
     @property

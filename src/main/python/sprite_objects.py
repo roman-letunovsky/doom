@@ -64,8 +64,7 @@ class Sprites:
                 'scale': (1.1, 1.1),
                 'side': 50,
                 'animation': [],
-                'death_animation': deque([pygame.image.load(f'sprites/devil/death/{i}.png')
-                                           .convert_alpha() for i in range(6)]),
+                'death_animation': deque([pygame.image.load(f'sprites/devil/death/{i}.png').convert_alpha() for i in range(6)]),
                 'is_dead': None,
                 'dead_shift': 0.6,
                 'animation_dist': None,
@@ -82,8 +81,7 @@ class Sprites:
                 'scale': (0.9, 1.0),
                 'side': 30,
                 'animation': [],
-                'death_animation': deque([pygame.image.load(f'sprites/devil1/death/{i}.png')
-                                           .convert_alpha() for i in range(11)]),
+                'death_animation': deque([pygame.image.load(f'sprites/devil1/death/{i}.png').convert_alpha() for i in range(11)]),
                 'is_dead': None,
                 'dead_shift': 0.5,
                 'animation_dist': None,
@@ -129,6 +127,24 @@ class Sprites:
                 'obj_action': deque([pygame.image.load(f'sprites/npc/soldier1/action/{i}.png')
                                     .convert_alpha() for i in range(4)])
             },
+            'skeleton_head': {
+                'sprite': [pygame.image.load(f'sprites/skelet/base/{i}.png').convert_alpha() for i in range(7)],
+                'viewing_angles': True,
+                'shift': 0.8,
+                'scale': (0.4, 0.6),
+                'side': 30,
+                'animation': [],
+                'death_animation': deque([pygame.image.load(f'sprites/skelet/death/{i}.png')
+                                         .convert_alpha() for i in range(4)]),
+                'is_dead': None,
+                'dead_shift': 1.7,
+                'animation_dist': None,
+                'animation_speed': 6,
+                'blocked': True,  # <-------------------
+                'flag': 'boss',
+                'obj_action': deque([pygame.image.load(f'sprites/skelet/anim/{i}.png')
+                                    .convert_alpha() for i in range(7)])
+            },
 
         }
         self.list_of_objects = [
@@ -168,7 +184,7 @@ class Sprites:
             SpriteObject(self.sprite_parameters['npc_soldier0'], (8.75, 3.65)),
             SpriteObject(self.sprite_parameters['npc_soldier0'], (1.27, 11.5)),
             SpriteObject(self.sprite_parameters['npc_soldier0'], (1.26, 8.29)),
-            # SpriteObject(self.sprite_parameters['npc_soldier0'], (2.56, 7.38)), # <------------
+            SpriteObject(self.sprite_parameters['npc_soldier0'], (2.56, 7.38)),
             SpriteObject(self.sprite_parameters['npc_soldier1'], (10.5, 1.1)),
             SpriteObject(self.sprite_parameters['npc_soldier1'], (3.66, 5.27)),
             SpriteObject(self.sprite_parameters['npc_soldier1'], (4.38, 6.56)),
@@ -252,9 +268,7 @@ class SpriteObject:
     def pos(self):
         return self.x - self.side // 2, self.y - self.side // 2
 
-
     def object_locate(self, player):
-
         dx, dy = self.x - player.x, self.y - player.y
         self.distance_to_sprite = math.sqrt(dx ** 2 + dy ** 2)
 
@@ -278,7 +292,7 @@ class SpriteObject:
             shift = half_sprite_height * self.shift
 
             if self.is_dead and self.is_dead != 'immortal':
-                sprite_object =self.dead_animation()
+                sprite_object = self.dead_animation()
                 shift = half_sprite_height * self.dead_shift
                 sprite_height = int(sprite_height / 1.3)
             elif self.npc_action_trigger:

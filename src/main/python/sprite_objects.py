@@ -159,6 +159,7 @@ class Sprites:
             SpriteObject(self.sprite_parameters['sprite_flame'], (1.25, 1.6)),
             SpriteObject(self.sprite_parameters['npc_skeleton'], (1.25, 1.6)),
             SpriteObject(self.sprite_parameters['sprite_flame'], (3.54, 8.42)),
+            SpriteObject(self.sprite_parameters['npc_skeleton'], (3.54, 8.42)),
             SpriteObject(self.sprite_parameters['sprite_flame'], (5.53, 9.43)),
             SpriteObject(self.sprite_parameters['sprite_flame'], (9.42, 8.48)),
             SpriteObject(self.sprite_parameters['sprite_flame'], (10.36, 3.73)),

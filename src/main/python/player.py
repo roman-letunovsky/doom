@@ -2,6 +2,8 @@ from settings import *
 import pygame
 import math
 from map import collision_walls
+from sprite_objects import SpriteObject, Sprites
+
 
 class Player:
     def __init__(self, sprites):
@@ -16,7 +18,6 @@ class Player:
         self.health = 30
         self.lives = 1
         self.alive = True
-
 
     @property
     def pos(self):
@@ -53,6 +54,9 @@ class Player:
                 dx = 0
         self.x += dx
         self.y += dy
+
+    def player_life(self):
+        self.lives = 30
 
     def movement(self):
         self.keys_control()

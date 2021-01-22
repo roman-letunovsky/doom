@@ -15,10 +15,11 @@ class Drawing:
         self.clock = clock
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
         self.font_win = pygame.font.SysFont('font/font.ttf', 144)
-        self.textures = {1: pygame.image.load('img/wall3.png').convert(),
-                         2: pygame.image.load('img/wall4.png').convert(),
-                         3: pygame.image.load('img/wall1.png').convert(),
-                         4: pygame.image.load('img/wall2.png').convert(),
+        self.textures = {4: pygame.image.load('img/wall5.png').convert(),
+                         # 5: pygame.image.load('img/wall6.png').convert(),
+                         1: pygame.image.load('img/wall4.png').convert(),
+                         2: pygame.image.load('img/wall1.png').convert(),
+                         3: pygame.image.load('img/wall2.png').convert(),
                          'S': pygame.image.load('img/sky2.png').convert()
                          }
         # menu

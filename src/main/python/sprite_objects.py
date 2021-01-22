@@ -1,6 +1,7 @@
 import pygame
 from settings import *
 from collections import deque
+from player import *
 
 
 class Sprites:
@@ -227,6 +228,11 @@ class Sprites:
     @property
     def sprite_shot(self):
         return min([obj.is_on_fire for obj in self.list_of_objects], default=(float('inf'), 0))
+
+    def sprite_attack(self):
+        self.player_life = 100
+        if self.sprite_parameters == player_pos:
+            self.player_life -= 1
 
 
 class SpriteObject:

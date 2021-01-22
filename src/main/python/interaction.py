@@ -83,13 +83,13 @@ class Interaction:
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
-        pygame.mixer.music.load('sound/theme.mp3')
+        pygame.mixer.music.load('sound/At_doom_gate.mp3')
         pygame.mixer.music.play(10)
 
     def check_win(self):
         if not len([obj for obj in self.sprites.list_of_objects if obj.flag == 'npc' and not obj.is_dead]):
             pygame.mixer.music.stop()
-            pygame.mixer.music.load('sound/win.mp3')
+            pygame.mixer.music.load('sound/At_doom_gate.mp3')
             pygame.mixer.music.play()
             while True:
                 for event in pygame.event.get():

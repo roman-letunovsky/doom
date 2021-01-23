@@ -1,8 +1,8 @@
-from player import Player
 from sprite_objects import *
 from ray_casting import ray_casting_walls
 from drawing import Drawing
 from interaction import Interaction
+from player import Player
 
 
 pygame.init()

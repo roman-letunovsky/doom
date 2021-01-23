@@ -1,7 +1,7 @@
-import pygame
-from settings import *
 from collections import deque
 from player import *
+import pygame
+from settings import *
 
 
 class Sprites:
@@ -23,6 +23,7 @@ class Sprites:
                 'animation_speed': 6,
                 'blocked': True,
                 'flag': 'decor',
+                'life': 10,
                 'obj_action': []
             },
             'sprite_pin': {
@@ -65,13 +66,15 @@ class Sprites:
                 'scale': (1.1, 1.1),
                 'side': 50,
                 'animation': [],
-                'death_animation': deque([pygame.image.load(f'sprites/devil/death/{i}.png').convert_alpha() for i in range(6)]),
+                'death_animation': deque([pygame.image.load(f'sprites/devil/death/{i}.png')
+                                         .convert_alpha() for i in range(6)]),
                 'is_dead': None,
                 'dead_shift': 0.6,
                 'animation_dist': None,
                 'animation_speed': 10,
                 'blocked': True,
                 'flag': 'npc',
+                'life': 30,
                 'obj_action': deque(
                     [pygame.image.load(f'sprites/devil/anim/{i}.png').convert_alpha() for i in range(9)]),
             },
@@ -82,13 +85,15 @@ class Sprites:
                 'scale': (0.9, 1.0),
                 'side': 30,
                 'animation': [],
-                'death_animation': deque([pygame.image.load(f'sprites/devil1/death/{i}.png').convert_alpha() for i in range(11)]),
+                'death_animation': deque([pygame.image.load(f'sprites/devil1/death/{i}.png')
+                                         .convert_alpha() for i in range(11)]),
                 'is_dead': None,
                 'dead_shift': 0.5,
                 'animation_dist': None,
                 'animation_speed': 6,
                 'blocked': True,  # <-------------------
                 'flag': 'npc',
+                'life': 30,
                 'obj_action': deque([pygame.image.load(f'sprites/devil1/action/{i}.png')
                                     .convert_alpha() for i in range(6)])
             },
@@ -99,14 +104,15 @@ class Sprites:
                 'scale': (0.4, 0.6),
                 'side': 30,
                 'animation': [],
-                'death_animation': deque([pygame.image.load(f'sprites/npc/soldier0/death/{i}.png')
-                                           .convert_alpha() for i in range(10)]),
+                'death_animation': deque([pygame.image.load(f'sprites/npc/soldier0/death/{i}.png').convert_alpha() for i
+                                          in range(10)]),
                 'is_dead': None,
                 'dead_shift': 1.7,
                 'animation_dist': None,
                 'animation_speed': 6,
                 'blocked': True,
                 'flag': 'npc',
+                'life': 20,
                 'obj_action': deque([pygame.image.load(f'sprites/npc/soldier0/action/{i}.png')
                                            .convert_alpha() for i in range(4)])
             },
@@ -117,14 +123,15 @@ class Sprites:
                 'scale': (0.4, 0.6),
                 'side': 30,
                 'animation': [],
-                'death_animation': deque([pygame.image.load(f'sprites/npc/soldier1/death/{i}.png')
-                                           .convert_alpha() for i in range(11)]),
+                'death_animation': deque([pygame.image.load(f'sprites/npc/soldier1/death/{i}.png').convert_alpha() for i
+                                          in range(11)]),
                 'is_dead': None,
                 'dead_shift': 1.7,
                 'animation_dist': None,
                 'animation_speed': 6,
                 'blocked': True,  # <-------------------
                 'flag': 'npc',
+                'life': 10,
                 'obj_action': deque([pygame.image.load(f'sprites/npc/soldier1/action/{i}.png')
                                     .convert_alpha() for i in range(4)])
             },
@@ -143,6 +150,7 @@ class Sprites:
                 'animation_speed': 10,
                 'blocked': True,
                 'flag': 'npc',
+                'life': 30,
                 'obj_action': deque(
                     [pygame.image.load(f'sprites/skeleton/anim/{i}.png').convert_alpha() for i in range(7)]),
             },
@@ -228,11 +236,6 @@ class Sprites:
     @property
     def sprite_shot(self):
         return min([obj.is_on_fire for obj in self.list_of_objects], default=(float('inf'), 0))
-
-    def sprite_attack(self):
-        self.player_life = 100
-        if self.sprite_parameters == player_pos:
-            self.player_life -= 1
 
 
 class SpriteObject:

@@ -2,7 +2,6 @@ from settings import *
 import pygame
 import math
 from map import collision_walls
-from sprite_objects import SpriteObject, Sprites
 
 
 class Player:
@@ -21,7 +20,7 @@ class Player:
 
     @property
     def pos(self):
-        return (self.x, self.y)
+        return self.x, self.y
 
     @property
     def collision_list(self):

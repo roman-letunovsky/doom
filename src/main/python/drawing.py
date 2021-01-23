@@ -1,10 +1,10 @@
 import pygame
 from settings import *
-from ray_casting import ray_casting
 from map import mini_map
 from collections import deque
 from random import randrange
 import sys
+# from ray_casting import ray_casting
 
 
 class Drawing:

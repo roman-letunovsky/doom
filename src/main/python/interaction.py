@@ -83,7 +83,7 @@ class Interaction:
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
-        pygame.mixer.music.load('sound/At_doom_gate.mp3')
+        pygame.mixer.music.load('sound/E1M1.mp3')
         pygame.mixer.music.play(10)
 
     def check_win(self):

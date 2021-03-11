@@ -2,7 +2,7 @@ from sprite_objects import *
 from ray_casting import ray_casting_walls
 from drawing import Drawing
 from interaction import Interaction
-from player import Player
+from player import *
 
 
 pygame.init()
@@ -24,8 +24,9 @@ while True:
     player.movement()
     drawing.background(player.angle)
     walls, wall_shot = ray_casting_walls(player, drawing.textures)
-    drawing.world(walls + [obj.object_locate(player) for obj in sprites.list_of_objects])
+    drawing.world(walls + [obj.object_locate(player) for obj in sprites.list_of_objects1])
     drawing.fps(clock)
+    # drawing.lives(player_life)
     drawing.mini_map(player)
     drawing.player_weapon((wall_shot, sprites.sprite_shot))
 

@@ -44,23 +44,25 @@ class Interaction:
         self.player = player
         self.sprites = sprites
         self.drawing = drawing
-        self.pain_soud = pygame.mixer.Sound('sound/pain.wav')
+        self.pain_sound = pygame.mixer.Sound('sound/pain.wav')
+        self.death_sound = pygame.mixer.Sound('sound/death.wav')
 
     def interaction_objects(self):
         if self.player.shot and self.drawing.shot_animation_trigger:
-            for obj in sorted(self.sprites.list_of_objects, key=lambda obj: obj.distance_to_sprite):
+            for obj in sorted(self.sprites.list_of_objects1, key=lambda obj: obj.distance_to_sprite):
                 if obj.is_on_fire[1]:
                     if obj.is_dead != 'immortal' and not obj.is_dead:
                         if ray_casting_npc_player(obj.x, obj.y, world_map, self.player.pos):
                             if obj.flag == 'npc':
-                                self.pain_soud.play()
+                                self.pain_sound.play()
+                                self.death_sound.play()
                             obj.is_dead = True
                             obj.blocked = None
                             self.drawing.shot_animation_trigger = False
                     break
 
     def npc_action(self):
-        for obj in self.sprites.list_of_objects:
+        for obj in self.sprites.list_of_objects1:
             if obj.flag == 'npc' and not obj.is_dead:
                 if ray_casting_npc_player(obj.x, obj.y,
                                           world_map, self.player.pos):
@@ -77,17 +79,21 @@ class Interaction:
             obj.y = obj.y + 1 if dy < 0 else obj.y - 1
 
     def clear_world(self):
-        deleted_objects = self.sprites.list_of_objects[:]
-        [self.sprites.list_of_objects.remove(obj) for obj in deleted_objects if obj.delete]
+        deleted_objects = self.sprites.list_of_objects1[:]
+        [self.sprites.list_of_objects1.remove(obj) for obj in deleted_objects if obj.delete]
 
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
-        pygame.mixer.music.load('sound/E1M1.mp3')
+        pygame.mixer.music.load('sound/Bfg Division.mp3')
         pygame.mixer.music.play(10)
 
+    # def next_level(self):
+    #     if not len([obj for obj in self.sprites.list_of_objects1 if obj.flag == 'npc' and not obj.is_dead]):
+
+
     def check_win(self):
-        if not len([obj for obj in self.sprites.list_of_objects if obj.flag == 'npc' and not obj.is_dead]):
+        if not len([obj for obj in self.sprites.list_of_objects1 if obj.flag == 'npc' and not obj.is_dead]):
             pygame.mixer.music.stop()
             pygame.mixer.music.load('sound/At_doom_gate.mp3')
             pygame.mixer.music.play()

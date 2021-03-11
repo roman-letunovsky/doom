@@ -58,6 +58,11 @@ class Drawing:
         render = self.font.render(display_fps, 0, DARKORANGE)
         self.sc.blit(render, FPS_POS)
 
+    def lives(self, player_life):
+        display_lives = str(int(player_life.get))
+        render_1 = self.font.render(display_lives, 0, RED)
+        self.sc.blit(render_1, LIVES_POS)
+
     def mini_map(self, player):
         self.sc_map.fill(BLACK)
         map_x, map_y = player.x // MAP_SCALE, player.y // MAP_SCALE

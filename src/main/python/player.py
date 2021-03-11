@@ -2,6 +2,7 @@ from settings import *
 import pygame
 import math
 from map import collision_walls
+from sprite_objects import *
 
 
 class Player:
@@ -25,7 +26,7 @@ class Player:
     @property
     def collision_list(self):
         return collision_walls + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in
-                                  self.sprites.list_of_objects if obj.blocked]
+                                  self.sprites.list_of_objects1 if obj.blocked]
 
     def detect_collision(self, dx, dy):
         next_rect = self.rect.copy()
@@ -54,8 +55,10 @@ class Player:
         self.x += dx
         self.y += dy
 
-    def player_life(self):
-        self.lives = 30
+    def player_life(self, parameters, pos):
+        self.lives = 100
+        if parameters['sprite'].copy() == player_pos:
+            self.lives -= 10
 
     def movement(self):
         self.keys_control()

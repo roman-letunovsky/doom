@@ -17,7 +17,7 @@ class Drawing:
         self.font_win = pygame.font.SysFont('font/font.ttf', 144)
         self.textures = {4: pygame.image.load('img/wall5.png').convert(),
                          # 5: pygame.image.load('img/wall6.png').convert(),
-                         1: pygame.image.load('img/wall4.png').convert(),
+                         1: pygame.image.load('img/IconOfSin_large.png').convert(),
                          2: pygame.image.load('img/wall1.png').convert(),
                          3: pygame.image.load('img/wall2.png').convert(),
                          'S': pygame.image.load('img/sky2.png').convert()
